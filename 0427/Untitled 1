@@ -1,0 +1,105 @@
+Text File 
+순차파일
+자기 tape 조작
+
+Text file 은 수정 불가능
+
+기존 자료의 정렬(Sorting)
+ 기존 파일의 자료 수정x  ->  불가능
+ 데이터는 입력되는 대로 쌓인다.
+ 
+ 3500000개 자료를 모두 검색해야 원하는 자료를 찾을수 있다. 
+ 파일 SSD에 있으면 엄청 빨리 읽는다. 만약 하드디스크에 있다면 엄청 느림...
+ 
+ 	aa	bbb	ccc  (Tab)			  이거랑
+ 	aa     bbb     ccc  (Space)   이거의 차이점은
+ 	"aa\tbbb\tccc\t"  			결국 이게 메모리를 적게 먹는다 . \t = 1byte 
+ 	"aa     bbb     ccc"		
+ 
+ record 는 한줄을 의미한다.EOL(end of line <-- 윈도우 \n 리눅스 \r\n)
+ record 안의 변수는 필드라고 부른다
+ field 구분자는 \t (Tab)
+ record 구분자는  (윈도우 \n) (리눅스 \r\n) 
+ 
+ 
+ ----숙제 ----
+ 
+첫번쨰 컬럼명은 읽고 다시 버리는 코딩을 해야한다.
+만약 30개뒤부터 검색한다고 치면 앞에 30개를 지워야한다. 데이터를 삭제하는게 아니라 다시 버리는 코딩을 해야한다.  
+
+package homework_0425;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class FindZipcode {
+   public static void main(String[] args) {
+      String path = "D:\\ws\\temp\\zipcode.txt";
+      String path2 = "D:\\ws\\temp\\FindZipcode.txt";
+
+      File file1 = new File(path);
+      File file2 = new File(path2);
+
+      FileReader fr = null;
+      FileWriter fw = null;
+      BufferedReader br = null;
+      BufferedWriter bw = null;
+
+      try {
+         fr = new FileReader(file1);
+         br =  new BufferedReader(new InputStreamReader(new FileInputStream(file1),"UTF-8"));
+         fw = new FileWriter(file2);
+         bw = new BufferedWriter(fw);
+
+         System.out.print("입력 : ");
+         Scanner sc = new Scanner(System.in);
+
+         String text = sc.nextLine();// 즉 입력값, 무엇을 검색하는지, nextLine은  enter 전까지 모두 저장하고 next 는 스페이스 즉 공백 전까지 입력받은 문자열을 리턴한다는 것이다.
+         String Line = br.readLine();// 즉 readLine 으로 한줄한줄 읽어서 BufferedReader 에 쌓아놓고 한번에 검색 함 .. (속도면에서 유리) 
+         							 // readLine 은 한줄을 읽어서 출력하고 한줄 읽어서 출력한다.
+         int i = 1;
+
+         while ((Line = br.readLine()) != null) {	// br.readLine을 읽어서 
+            String name = Line;
+            
+      readLine 은 인트를 반환하니깐 int i 를 생성하고       
+            
+            
+            
+            if (name.contains(text)) { 		//한 줄 읽은것이랑 text (내가 검색한 것) 이랑 포함된것이 있는지. 있다면 
+               System.out.println(text + " 개수 " + i);
+               i++;
+               bw.write(name + "\n");
+            }
+         }
+
+      } catch (FileNotFoundException e) {
+         System.out.println("파일이 없습니다.");
+      } catch (IOException e) {
+         System.out.println("오류발생: " + e.getMessage());
+      } finally {
+         try {
+            if (br != null)
+               br.close();
+            if (fr != null)
+               fr.close();
+            if (bw != null)
+               bw.close();
+            if (fw != null)
+               fw.close();
+         } catch (Exception e2) {
+
+         }
+      }
+      System.out.println("작업완료");
+   }
+
+}

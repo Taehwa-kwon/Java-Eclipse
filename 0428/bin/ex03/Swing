@@ -1,0 +1,20 @@
+04/28일 SwingCalc 이거 다운받아서 이 방법도 보기 .왜냐하면 switch라는 방법도 더 간편하게 사용하더라..
+
+https://growinglastcanyon.tistory.com/6
+
+ Integer.valueOf(String);
+ -자료형 , 산술 연산'이 가능 , Null초기화 불가.
+
+ Integer.parseInt(String);
+ -Wrapper 클래스 , 산술연산 불가, Null초기화 가능
+ 
+ 
+	
+ 
+ 
+ Java는 기본형 타입(위에서 말한 primitive 자료형)과 객체 참조(클래스) 같은 두 가지 타입의 관리 데이터를 가집니다
+  경우에 따라서 기본형 타입을 객체로 사용하는 경우가 있으며, 이러현 강우 기본형 타입 값을 객체로 표현해야합니다.
+ 이때 Wrapper 클래스를 사용하는데, 특정 기본형 타입으로 나타냅니다. 예를 들어 Integer 클래스는 간단한 정수 값을 나타내며 객체는 하나의 int값을 저장할 수 있습니다.
+ 
+ 	Integer a = new Integer(10);
+	Double b = new Double("4.57");  

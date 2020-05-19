@@ -1,0 +1,44 @@
+package Switch문;
+
+import java.util.Scanner;
+
+public class Practice3 {
+	public static void main(String[] args) {
+	
+		char  [] score  = { 'F' , 'F', 'F', 'F', 'F', 'D', 'C', 'B', 'A', 'A' };
+		int kor,eng,mat;
+		int tot = 0;
+		double avg;
+		
+		Scanner in = new Scanner(System.in);
+		kor = in.nextInt();
+		eng = in.nextInt();
+		mat = in.nextInt();
+		
+		cal(kor,eng,mat);//주의할 점이 이 전체를 넘겨주고 
+		System.out.println(cal(kor,eng,mat)); // 이 전체를 출력해야 정확한 값이 나온다.
+		
+		
+		
+		System.out.println(avg(tot/3));
+		
+		char A = score[tot/10];
+		System.out.println(A);
+		
+	}
+
+
+	private static int avg(int i) {
+		int avg = (int)(i+0.5);
+		return avg;
+	}
+
+
+	private static int cal(int kor, int eng, int mat) {
+		int tot = kor+eng+mat;
+		System.out.println(tot);
+		return tot;
+		
+	}
+
+}

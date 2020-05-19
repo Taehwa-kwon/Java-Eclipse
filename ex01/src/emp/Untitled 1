@@ -1,0 +1,27 @@
+	static String [] empid = new String[N];
+	static String [] name = new String[N];
+	static String [] hiredate = new String[N];
+	static double [] sal = new double[N];
+	static double [] comm = new double[N];
+	static String [] deptid = new String[N];
+	
+	static String [] part_number = new String[N];
+	static String [] part_name = new String[N];
+	static String [] part_salary = new String[N];
+	//출력 변수 
+	static double [] pay = new double[N];
+	static String [] deptname = new String[N];
+	static int [] years = new int [N];
+	static int [] payrank = new int [N];
+	
+	static int [] part_salary_avg = new int [N];
+	static int [] salary_higer = new int [N];
+	static int [] salary_lower = new int [N];
+	
+	==해당을 입력받기 
+	System.out.println("데이터를 입력");
+	System.out.println("예) 사번: 이름: 입사일: 월급: 보너스: 부서번호  (추가정보: 공백없이 콤마로 구분하시오)");
+	
+	
+	연차는 올해 - 입사년도
+	실수령 월급 + 보너스 + 월급 *3 	

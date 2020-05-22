@@ -17,10 +17,10 @@ public class Ex01_Practice {
 		output();
 	}
 	
-	private static void input() {
+	private static void input() { //해당 메소드가 void 인데 값을 저장할수 있는 이유는 static 변수가 있어서 값을 저장할 수 있다. 
 		Scanner in = new Scanner(System.in);
 		System.out.println("이름 : ");
-		name = in.next();
+		name = in.next(); 
 		System.out.println("국어 : ");
 		kor = in.nextInt();
 		System.out.println("영어 : ");

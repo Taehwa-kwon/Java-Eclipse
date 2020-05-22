@@ -54,7 +54,7 @@ public class Ex01_Test03_1 {
 		
 		
 		Calendar calendar = Calendar.getInstance();
-		int Year = calendar.get(Calendar.YEAR);
+		int Year = calendar.get(Calendar.DATE);
 		System.out.println(Year);
 		
 		

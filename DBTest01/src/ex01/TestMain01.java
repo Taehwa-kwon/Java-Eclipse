@@ -46,7 +46,7 @@ public class TestMain01 {
 		//방법2.
 		//String sql = "SELECT D.DEPARTMENT_NAME, E.FIRST_NAME, E.LAST_NAME\r\n" +
 		//			"FROM EMPLOYEES E, DEPARTMENTS D\r\n "+
-		//			"WHERE E>DEPARTMENT_ID = D.DEPARTMENT_ID";
+		//			"WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID";
 		//방법3.
 		String sql = "SELECT D.DEPARTMENT_NAME,";
 		sql 	   += "E.FIRST_NAME || ' '  || E.LAST_NAME AS NAME "; //SYSDATE , SUM(SALARY), 뭐 등등 그것들은 아래에서 사용불가 그래서 alains를 사용해야 한다.

@@ -12,7 +12,7 @@ import ex05.Student2;
 public class TestMain {
 
 	private static String driver = "oracle.jdbc.OracleDriver";
-	private static String url = "jdbc:oracle:thin:@127.0.1:1521:xe"; //192.168.35.159
+	private static String url = "jdbc:oracle:thin:@localhost:1521:xe"; //192.168.35.159
 	private static String dbuid = "hrd202";
 	private static String dbpwd = "1234";
 	

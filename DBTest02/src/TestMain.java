@@ -6,7 +6,9 @@ public class TestMain { //4.
 			DBhandler db = new DBhandler();//4. 목적은 생성자를 생성하는 것 . 생성자에 저렇게 db.open()을 넣어두면  객체를 안만들어도 가능함 .
 			
 			//여러명의 목록조회
+			
 			List<Member> list = db.getMemberList();//4.적어주고  			//7.create 메소드
+			
 			//List 의 경우 배열의 일종이지만 자료형의 개수가 가변인 상황에서 사용이 유리하다. 
 				//제네릭
 			
@@ -33,10 +35,24 @@ public class TestMain { //4.
 			//ArrayList<String> aList = new ArrayList<String>();
 			//String자리에는 다양한 자료형이 올수 있다. 
 			
-			//개인조회
-			//Member m = db.getMember(); //4.
-			db.close();//4.
+			//개인조회 18
+			System.out.println("======================");
+			int mid = 3;//18
+			Member m = db.getMember(mid); //18
+			if( m== null) System.out.println(mid + "번 자료가 없습니다."); //21
+			System.out.println(m.info()); //22
+			//db.close();//4.
 			
+			
+			//추가 
+			Member m2 = new Member("은영3","yy@naver.com","010-5555-1111");
+			db.addMember(m2);
+			int cnt = db.addMember(m2);
+			System.out.println(cnt +"건이 추가 되었습니다");
+			
+			
+			
+			db.close();
 			
 	}
 

@@ -18,5 +18,6 @@ JDBC (JAVA DATABASE CONNECTIVETY LIBRAY
   DriverManager.getConnection //상단의 url,dbuid,dbpwd을 통해서 연결 
   
   인터넷 환경에서 다른 컴퓨터를 연결하기 위해서 IP(인터넷 상 의 주소)를 사용 (전화번호도 하나의 ip인데 컴퓨터는 port라는 기능을 통해서 
+  port를 통해서 마우스,키보드,usb와 통신하고 있다.
 
 

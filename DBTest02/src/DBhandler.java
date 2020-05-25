@@ -14,7 +14,7 @@ public class DBhandler {
 	
 	private Connection conn;
 	private Statement stmt;
-	private ResultSet rs;
+	private ResultSet rs; //oracle의 결과물에 첫번째 위치에 커서를 주고있다. 
 	
 	//생성자란 객체가 생성될때 반드시 실행되어야 할것들
 	public DBhandler() { //1.
@@ -58,7 +58,7 @@ public class DBhandler {
 			sql += " WHERE M.POINT BETWEEN ML.LOPOINT AND ML.HIPOINT ";
 			
 			
-			 rs = stmt.executeQuery(sql); //10.이것의 executeQuery 리턴값이 ResultSet 이니깐  ResultSet으로 받아줘야함 
+			 ResultSet rs = stmt.executeQuery(sql); //10.이것의 executeQuery 리턴값이 ResultSet 이니깐  ResultSet으로 받아줘야함   //자동 commit이 된다. 
 			while(rs.next()) {
 				int mid = rs.getInt(1);//13
 				String name = rs.getString(2);
@@ -76,4 +76,66 @@ public class DBhandler {
 		}	
 		return list;
 	}
+
+	public Member getMember(int mid) { //18
+		Member m = null; //18 처음에 null값을 줘서 값이 있으면 
+		
+		try {//19
+			stmt = conn.createStatement();
+			String sql = "SELECT MID, NAME, EMAIL, PHONE, POINT, ML.MLEVEL, ";	  
+				sql += " TO_CHAR(RDATE,'YYYY-MM-DD DAY') RDATE " ;
+				sql += " FROM MEMBER M, MEMBERLEVEL ML ";
+				sql += " WHERE M.POINT BETWEEN ML.LOPOINT AND ML.HIPOINT AND M.MID = " + mid;
+				rs = stmt.executeQuery(sql); 
+				
+				if( rs.next()) {  //20-1 mid는 하나의 자료만 나타나니깐 while쓸 필요는없다. 근데 mid =4 면은 오류가 아니라 아무것도 검색결과가 나오지 않는다.
+									//그러니깐 if안에서 rs.next가 true이면 아래를 실행한다.
+					int mid2 = rs.getInt(1);
+					String name = rs.getString(2);
+					String email = rs.getString(3);
+					String phone = rs.getString(4);
+					int point = rs.getInt(5);
+					String mlevel = rs.getString(6);
+					String rdate = rs.getString(7);
+					
+					m= new Member (mid2,name,email,phone,point,mlevel, rdate);
+					
+				}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return m;
+	}
+	
+	
+	public int addMember(Member m) {
+		
+		int aftcnt = 0;
+		try {
+			stmt = conn.createStatement();
+			String sql = "INSERT INTO MEMBER (MID,NAME,EMAIL,PHONE) " ;
+			sql += "VALUES (( SELECT NVL(MAX(MID),0) +1 FROM MEMBER), ";
+			sql += " '" + m.getName() + "',";
+			sql += " '" + m.getEmail() + "',";
+			sql += " '" + m.getPhone() + "')";
+			System.out.println(sql);
+			
+			aftcnt = stmt.executeUpdate(sql);
+			
+			
+					
+			
+			System.out.println(aftcnt + "건이 ");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return aftcnt;
+	}
+	
+	
+	
 }

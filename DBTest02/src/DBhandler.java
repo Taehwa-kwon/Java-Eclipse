@@ -118,16 +118,12 @@ public class DBhandler {
 			stmt = conn.createStatement();
 			String sql = "INSERT INTO MEMBER (MID,NAME,EMAIL,PHONE) " ;
 			sql += "VALUES (( SELECT NVL(MAX(MID),0) +1 FROM MEMBER), ";
+			//sql += " values (15, ";
 			sql += " '" + m.getName() + "',";
 			sql += " '" + m.getEmail() + "',";
 			sql += " '" + m.getPhone() + "')";
-			System.out.println(sql);
 			
 			aftcnt = stmt.executeUpdate(sql);
-			
-			
-					
-			
 			System.out.println(aftcnt + "건이 ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -135,6 +131,36 @@ public class DBhandler {
 		}
 		return aftcnt;
 	}
+	
+	public int delMember(int del_mid) {
+		int cnt = 0;
+		
+		try {
+			stmt = conn.createStatement();
+			String sql = " delete from member where mid=" + del_mid ;
+			cnt=stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	public int updateMember(Member um) {
+		int Cnt = 0;
+		try {
+			stmt = conn.createStatement();
+			String sql = "update MEMBER SET NAME = '"+um.getName()+"', email = '"+um.getEmail() +"', phone ='"+um.getPhone()+"', point = '"+um.getPoint()+"' where mid ="+um.getMid();
+			Cnt = stmt.executeUpdate(sql);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Cnt;
+	}
+
+
 	
 	
 	

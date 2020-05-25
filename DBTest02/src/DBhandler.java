@@ -47,7 +47,7 @@ public class DBhandler {
 	}
 	//member 목록조회 MID, NAME, EMAIL, MLEVEL, RDATE
 	public List<Member> getMemberList() {   //8.메소드 작성
-		List<Member> list = new ArrayList<>();//11
+		List<Member> list = new ArrayList<>();//11. ArrayList생성방법임. List 컬렉션에 select 한것을 담기위해서 
 		
 		//stmt = conn.createStatement();//9.surround 
 		try {
@@ -58,7 +58,7 @@ public class DBhandler {
 			sql += " WHERE M.POINT BETWEEN ML.LOPOINT AND ML.HIPOINT ";
 			
 			
-			 rs = stmt.executeQuery(sql); //10.이것의 리턴값이 ResultSet 이니깐
+			 rs = stmt.executeQuery(sql); //10.이것의 executeQuery 리턴값이 ResultSet 이니깐  ResultSet으로 받아줘야함 
 			while(rs.next()) {
 				int mid = rs.getInt(1);//13
 				String name = rs.getString(2);

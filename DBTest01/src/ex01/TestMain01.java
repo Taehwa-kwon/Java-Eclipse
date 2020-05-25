@@ -19,14 +19,14 @@ public class TestMain01 {
 	//- rt.jar 
 	
 	
-	private static String driver = "oracle.jdbc.OracleDriver";
+	private static String driver = "oracle.jdbc.OracleDriver";//oracle.jdbc라는 패키지 , 
 	private static String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static String dbuid ="hr";
 	private static String dbpwd ="1234";
 	//이것들이 ojdbc 를 통해서 oralce에 접근한다. 
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		Class.forName(driver); //일단 add throws . 이 클래스를 찾을수 없으면  //나는 오라클을 연결할 것이다. 
+		Class.forName(driver); //일단 add throws . 이 클래스를 찾을수 없으면  //나는 오라클을 연결할 것이다. ojdbc를 연결하겠다. 
 		Connection conn = DriverManager.getConnection(url, dbuid, dbpwd); //import하고  //나는 이것들을 통해서 접근하겠다 // 다시 throw를 하면 SQLException이 된다. 
 //		Class Drivermanager 위에 문장을 길게 나타낸것이 사실 이거다 
 //		{

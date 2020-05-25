@@ -28,7 +28,17 @@ import하는 이유는 java.sql.   Statement,Connection,ResultSet등등의 클�
 
 
 --05/24  오후
+
+
 mybatis 
 preparedstatement
 statement 
 
+SQL injection 
+String uid = "a";
+String pwd = "1' or '1'='1";    이건 무조건 비밀번호 다뚫리는것. 이게 injection 이며 statement가 가지는 문제점..
+
+select * from member where (uid = 'a' and pwd = '1' ) or ('1'='1')
+
+or이 입력이 안되도록 걸러줘야하는데 그걸 preparedstatement 가 막아준다. 
+preparedstatement 는 인자를 물음표로 처리하는데 만약 System.out.println하면 값이 안나옴 (이게 단점임 ..) 

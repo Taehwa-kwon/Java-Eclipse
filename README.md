@@ -1,5 +1,7 @@
 # Java-Eclipse
 
+--05/24   오전
+
 라이브러리 : 같은 함수들 모아둔것이 라이브러리 ,
 
                                응용(view)
@@ -24,4 +26,9 @@ JDBC (JAVA DATABASE CONNECTIVETY LIBRAY
 jar 파일 : 압축파일이다...아 압축을 풀어서보면 java,sql,util,swing 각종 폴더안에 data.class , array.class등등 엄청나게 많이있음
 import하는 이유는 java.sql.   Statement,Connection,ResultSet등등의 클래스가 있음 
 
+
+--05/24  오후
+mybatis 
+preparedstatement
+statement 
 

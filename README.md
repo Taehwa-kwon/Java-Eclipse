@@ -42,3 +42,14 @@ select * from member where (uid = 'a' and pwd = '1' ) or ('1'='1')
 
 or이 입력이 안되도록 걸러줘야하는데 그걸 preparedstatement 가 막아준다. 
 preparedstatement 는 인자를 물음표로 처리하는데 만약 System.out.println하면 값이 안나옴 (이게 단점임 ..) 
+
+
+--05/25  오전
+Statement - PreparedStatement - CallableStatement
+Statement Run을 했을때 문장을 넘겨서 문장의 오류를 검사하고 select from 구문분석하고 , 컴파일하고 저장하고 , 다시 불러와서 실행하고 이러한 과정을 반복
+캐시 : 동일한 문장을 반복할때 이를 미리 저장해서 더 빠르게 실행
+Preparedstatement - Statement 같은 문장을 반복할때 구문분석 문법체크 컴파일 과정을 생략하여 내부적으로 속도를 훨씬 빠르게 만듬. 
+                  - 또한 보안에 관해서 훨씬 더 좋다.
+                  - 그렇다면 단점은 없냐??있지. 이미 캐시에 저장되어 있어서 System.out.println이 작동하지 않는다. 
+                  -사용법 : 바인딩 ( ? 을 통해서 값을 넣는 것 ) 
+

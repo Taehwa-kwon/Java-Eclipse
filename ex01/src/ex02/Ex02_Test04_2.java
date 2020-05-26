@@ -57,7 +57,8 @@ public class Ex02_Test04_2 {
 		
 		age = thisYear-birthYear+1;
 		
-		adult=(age>=19)?true : false ;
+		adult=(age>=19)? true : false ;//불린타입이니깐 true false로만 반환받음 
+		
 		
 		//총점
 		tot=kor + eng + mat ;

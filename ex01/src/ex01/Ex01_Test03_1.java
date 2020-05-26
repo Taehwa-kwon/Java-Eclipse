@@ -54,8 +54,8 @@ public class Ex01_Test03_1 {
 		
 		
 		Calendar calendar = Calendar.getInstance();
-		int Year = calendar.get(Calendar.DATE);
-		System.out.println(Year);
+		int date = calendar.get(Calendar.DATE);
+		System.out.println(date);
 		
 		
 		java.util.Date today = new java.util.Date();

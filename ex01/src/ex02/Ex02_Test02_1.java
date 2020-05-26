@@ -33,7 +33,7 @@ public class Ex02_Test02_1 {
 		
 		
 		System.out.println("이름");
-		name = sc.next();
+		name = sc.next();//nextLine
 		System.out.println("나이");
 		age  = sc.nextInt();
 		System.out.println("점수");

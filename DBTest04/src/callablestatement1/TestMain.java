@@ -3,7 +3,7 @@ package callablestatement;
 import java.util.List;
 
 public class TestMain {
-	
+	private static MemberDao dao = new MemberDao(); //DB연결하는 클래스
 	//PL/SQL  (Procedural Language) 안에 
 	//1. Anonymous procedure 이릅없는 PL/SQL문 
 	//2. 프로시저(Stored Procedure) 각 프로그램 별로 이름을 가지고 데이터베이스에 저장되어 사용되며, 인자를 받아서 호출/실행
@@ -19,7 +19,7 @@ public class TestMain {
 	public static void main(String[] args) {
 		String uid = "sky1";
 		
-		MemberDao dao = new MemberDao(); //DB연결하는 클래스 
+		 
 		MemberVO vo = new MemberVO(uid,"태화","th@nate.com","1234","010-6565-6581"); //생성자 클래스 
 		
 		//dao.addMember(vo);

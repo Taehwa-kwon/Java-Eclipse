@@ -34,23 +34,30 @@ public class TestMain {
 			System.out.println(selMem.info());
 		System.out.println("한 사람의 정보를 조회한다.");
 		
+		
 		//수정
 		MemberVO updateMem = dao.updateMember(uid);
 		
 		
+		displayMemberList();
 		
-		//삭제
-		int aftcnt = dao.delMember(uid);
+		// 삭제
+		int aftcnt  = dao.delMember( "sky5"  );
+		System.out.println(aftcnt + "건 삭제 되엇습니다");
+			
+		displayMemberList();
+	}
 		
-		
-		
+	
+
+	private static void displayMemberList() {
 		// 전체 조회 : cursor 사용
+		System.out.println("=====================================");
 		List<MemberVO>  list = dao.getMemberList();
 		for (MemberVO memberVO : list) {
 			System.out.println( memberVO.listInfo() );
-			
-		dao.close();
-		
 		}
+		
 	}
+	
 }

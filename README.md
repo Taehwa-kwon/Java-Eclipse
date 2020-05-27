@@ -52,5 +52,12 @@ Preparedstatement - Statement 같은 문장을 반복할때 구문분석 문법�
                   - 또한 보안에 관해서 훨씬 더 좋다.
                   - 그렇다면 단점은 없냐??있지. 이미 캐시에 저장되어 있어서 System.out.println이 작동하지 않는다. 
                   -사용법 : 바인딩 ( ? 을 통해서 값을 넣는 것 ) 
+                  
+                  
+
+
 --05/25 오후
 참고할 사이트 : https://wiper2019.tistory.com/57?category=776243
+
+
+--05/26 오전

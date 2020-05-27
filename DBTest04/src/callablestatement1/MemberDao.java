@@ -160,19 +160,21 @@ public class MemberDao {//!!!!!!!!!!!!!!!!!DAO 의 역할은 출력의 목적이
 		
 		
 		public int delMember(String memid) {
-			int delCnt =0;
+			int delCnt = 0;
 			try {
-				String sql = "{ call SPDELMEMBER (?) }";
-				cstmt = conn.prepareCall(sql);
-				cstmt.setString(1, memid);
-				delCnt = cstmt.executeUpdate();
-				System.out.println("삭제건수 : " + delCnt);
+				String sql = "{call  SPDELMEMBER(?, ?) }";  
+				cstmt      =  conn.prepareCall(sql);
+				cstmt.setString( 1, memid );
+				cstmt.registerOutParameter(2, Types.NUMERIC );
 				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				cstmt.executeUpdate();
+				
+				delCnt  = cstmt.getInt( 2 ); 
+				System.out.println( "삭제건수:" + delCnt  );
+			} catch (SQLException e) {			
 				e.printStackTrace();
 			}
-			return 0;
+			return delCnt;
 		}
 		
 }

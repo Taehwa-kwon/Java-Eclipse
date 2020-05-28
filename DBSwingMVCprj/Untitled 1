@@ -1,0 +1,6 @@
+	sqlplus /nolog
+SQL> conn / as sysdba
+SQL> create user member2 identified by 1234;
+SQL> grant connect, resource to member2;
+
+Oracle 

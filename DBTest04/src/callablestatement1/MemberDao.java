@@ -146,16 +146,26 @@ public class MemberDao {//!!!!!!!!!!!!!!!!!DAO 의 역할은 출력의 목적이
 			return list; //조회한 자료가 없다면 list의 사이즈를 찍어라 
 		}
 		
-		public MemberVO updateMember(String uid) {
+		public MemberVO updateMember(String uid) {  --아직 해보지는 않았음 (내 머릿속 코딩) 
+			int upCnt = 0;
 			try {
-				String sql = "{ call SPUPDATEMEMBER (?) }";
+				String sql = "{ call SPUPDATEMEMBER (?,?,?,?) }";
 				cstmt = conn.prepareCall(sql);
+				cstmt.setString(1,memid);
+				cstmt.setString(2,email);
+				cstmt.setString(3,passwd);
+				cstmt.setString(4,phone);
+				
+				cstmt.executeUpdate();
+				
+				upCnt = cstmt.getInt(2);
+				System.out.println("업데이트 건수 : " + upCnt);
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return null;
+			return upCnt;
 		}
 		
 		

@@ -72,8 +72,11 @@ public class MemberDao {
 		return mem;
 	}
 	
-	public List<MemberVO> getMemberList(String string){
-		List<MemberVO> mList = new Vector<MemberVO>(); //Vector 만약에 게임의 경우 공격과 소리가 함께 나야하니깐 그럴때 사용하는게 Vector이다 . 
+	
+	
+	/* swing은  제네릭을 인식못한다....ㅋㅋㅋㅋ 
+	public Vector<MemberVO> getMemberList(String string){
+		Vector<MemberVO> mList = new Vector<MemberVO>(); //Vector 만약에 게임의 경우 공격과 소리가 함께 나야하니깐 그럴때 사용하는게 Vector이다 . 
 		MemberVO mem = null;
 		
 		try {
@@ -102,6 +105,50 @@ public class MemberDao {
 		
 		return mList;
 	}
+	*/
+	//Swing용 : list는 한줄한줄이 memberVO이다. 
+	// 근데 Vector은 
+	public Vector getMemberList(String string){
+		Vector mList = new Vector(); //Vector 만약에 게임의 경우 공격과 소리가 함께 나야하니깐 그럴때 사용하는게 Vector이다 . 
+		
+		try {
+			conn = DBConn.getInstance();
+			String sql ="select id, pwd, name, job, gender, intro, regdate from member2 where name like ? " ; //'%석%' 이거 전체가 물음표가 되어야 한다. 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+ string + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String id = rs.getString(1);
+				String pwd = rs.getString(2);
+				String name = rs.getString(3);
+				String job = rs.getString(4);
+				String gender = rs.getString(5);
+				String intro = rs.getString(6);
+				String regdate = rs.getString(7);
+				
+				Vector mem = new Vector();
+				mem.add(id); 
+				mem.add(pwd);
+				mem.add(name);
+				mem.add(job);
+				mem.add(gender);
+				mem.add(intro);
+				mem.add(regdate);
+				
+				mList.add(mem);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return mList;
+	}
+	
+	
+	
 
 	public int addMember(MemberVO insert) {
 		int insertCnt = 0;

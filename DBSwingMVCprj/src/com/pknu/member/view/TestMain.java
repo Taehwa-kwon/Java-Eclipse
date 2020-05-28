@@ -1,6 +1,6 @@
 package com.pknu.member.view;
 
-import java.util.List;
+import java.util.Vector;
 
 import com.pknu.member.dao.MemberDao;
 import com.pknu.member.vo.MemberVO;
@@ -28,6 +28,18 @@ public class TestMain {
 //		for (MemberVO memberVO : mlist) {
 //			System.out.println(memberVO.listInfo());
 //		}
+		//목록조회
+		System.out.println(""); //vector안에 vector 이다. 첫번째 사이즈는 2개가 왔는데 0번째 원석 1번째 진석이 와있음 . i = 0 일때 원석을 꺼내는데 j 는 컬럼이 온것 
+		Vector mList = mDao.getMemberList("석");
+		for (int i = 0; i < mList.size(); i++) {
+			System.out.println();
+			Vector v = (Vector) mList.get(i);
+			for (int j = 0; j < v.size(); j++) {
+				System.out.print(v.get(j)+" ");
+				
+			}
+			
+		}
 //		
 //	
 //		//수정
@@ -36,9 +48,9 @@ public class TestMain {
 //		System.out.println(updateCnt+"건이 수정되었습니다.");
 		
 		//삭제
-		MemberVO delete = new MemberVO("jk6581");
-		int deleteCnt = mDao.deleteMember(delete);
-		System.out.println(deleteCnt+"건이 삭제되었습니다.");
+//		MemberVO delete = new MemberVO("jk6581");
+//		int deleteCnt = mDao.deleteMember(delete);
+//		System.out.println(deleteCnt+"건이 삭제되었습니다.");
 		
 		
 		 

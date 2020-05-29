@@ -60,12 +60,13 @@ public class MemberProc extends JFrame implements ActionListener { //JFrame을 �
 		this.setLocationRelativeTo(null); // 프레임 실행시 위치 중앙
 	}
 
-	//기본 생성자 
+	//기본 생성자 : 회원추가용 생성자  
 	 MemberProc(MemberList memberList) {
 		this(); //내 기본생성자를 호출해라. = MemberProc();
-		
-		this.memberList = memberList; //다시 
+		this.memberList = memberList; //여기서 중요한개념.. 필드의 중요성이 나오는거지. 05/29 마치기전에 송지현한테 물어본거 기억하기.
+		buttonSetting(1);
 	}
+
 	 //마우스 생성자 
 	 public MemberProc(String uid, MemberList memberList) {
 		 
@@ -75,6 +76,24 @@ public class MemberProc extends JFrame implements ActionListener { //JFrame을 �
 		 MemberVO mem = mDao.getMember(uid);
 		 viewData(mem);
 		 
+		 buttonSetting(2);
+		 
+	}
+
+	private void buttonSetting(int type) {
+		switch(type) {
+		case 1: this.btnInsert.setEnabled(true);//setVisible은 아예 버튼이 사라지는 효과 
+				this.btnCancel.setEnabled(true);
+				this.btnDelete.setEnabled(false);
+				this.btnUpdate.setEnabled(false);
+				break;
+		case 2: this.btnInsert.setEnabled(false);
+				this.btnCancel.setEnabled(true);
+				this.btnDelete.setEnabled(true);
+				this.btnUpdate.setEnabled(true);
+				break;
+		}
+		
 	}
 
 	private void viewData(MemberVO m) {

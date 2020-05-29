@@ -28,6 +28,7 @@ public class TestMain {
 //		for (MemberVO memberVO : mlist) {
 //			System.out.println(memberVO.listInfo());
 //		}
+		
 		//목록조회
 		System.out.println(""); //vector안에 vector 이다. 첫번째 사이즈는 2개가 왔는데 0번째 원석 1번째 진석이 와있음 . i = 0 일때 원석을 꺼내는데 j 는 컬럼이 온것 
 		Vector mList = mDao.getMemberList("석");
@@ -40,6 +41,7 @@ public class TestMain {
 			}
 			
 		}
+		
 //		
 //	
 //		//수정

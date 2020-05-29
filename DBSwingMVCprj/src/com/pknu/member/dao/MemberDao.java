@@ -35,9 +35,9 @@ public class MemberDao {
 	public MemberVO getMember(String userid) { //import 패키지가 다른경우에 import를 해야함. 
 		
 		MemberVO mem = null;
-		conn = DBConn.getInstance();
 		//pstmt = conn.prepareStatement(sql);//15.surround
 		try {
+			conn = DBConn.getInstance();
 			String sql ="select id, pwd, name, job, gender, intro, regdate from member2 where id = ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userid);//물음표에 대한 처리 
@@ -152,8 +152,8 @@ public class MemberDao {
 
 	public int addMember(MemberVO insert) {
 		int insertCnt = 0;
-		conn = DBConn.getInstance();
 		try {
+			conn = DBConn.getInstance();
 			String sql = " insert into member2 (id, pwd, name, job, gender, intro) values (?,?,?,?,?,?) ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, insert.getId());
@@ -173,9 +173,9 @@ public class MemberDao {
 	}
 	public int updateMember(MemberVO update) {
 		int updateCnt = 0;
-		conn = DBConn.getInstance();
 		
 		try {
+			conn = DBConn.getInstance();
 			String sql = "update member2 set pwd = ? , name = ?, job = ? , gender = ?, intro = ? where id = ?";
 			pstmt = conn.prepareStatement(sql); //preparecall 은 프로시저 
 			pstmt.setString(1, update.getPwd());
@@ -195,8 +195,8 @@ public class MemberDao {
 	}
 	public int deleteMember(MemberVO delete) {
 		int deleteCnt = 0;
-		conn = DBConn.getInstance();
 		try {
+			conn = DBConn.getInstance();
 			String sql = " delete from member2 where id = ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, delete.getId());
@@ -207,6 +207,68 @@ public class MemberDao {
 		}
 		
 		return deleteCnt;
+	}
+	public boolean insertMember(MemberVO mem) {
+		int cnt = 0;
+		try {
+			conn = DBConn.getInstance();
+			String sql = " insert into member2 (id, pwd, name, job, gender, intro) values (?,?,?,?,?,?) ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem.getId());
+			pstmt.setString(2, mem.getPwd());
+			pstmt.setString(3, mem.getName());
+			pstmt.setString(4, mem.getJob());
+			pstmt.setString(5, mem.getGender());
+			pstmt.setString(6, mem.getIntro());
+			
+			cnt = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean ok = (cnt ==0)? false: true;
+		return ok;
+	}
+	
+	public boolean DeleteMember(MemberVO mem) {
+		int deleteCnt = 0;
+		try {
+			conn = DBConn.getInstance();
+			String sql = " delete from member2 where id = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem.getId());
+			deleteCnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean ok = (deleteCnt == 0)? false: true;
+		return ok;
+		
+	}
+	public boolean UpdateMember(MemberVO mem) {
+		int updateCnt = 0;
+		
+		try {
+			conn = DBConn.getInstance();
+			String sql = "update member2 set pwd = ? , name = ?, job = ? , gender = ?, intro = ? where id = ?";
+			pstmt = conn.prepareStatement(sql); //preparecall 은 프로시저 
+			pstmt.setString(1, mem.getPwd());
+			pstmt.setString(2, mem.getName());
+			pstmt.setString(3, mem.getJob());
+			pstmt.setString(4, mem.getGender());
+			pstmt.setString(5, mem.getIntro());
+			pstmt.setString(6, mem.getId());
+			
+			updateCnt = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean ok = (updateCnt ==0)? false: true;
+		return ok;
 	}
 	
 

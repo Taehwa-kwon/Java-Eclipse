@@ -50,6 +50,12 @@ public class MemberVO {
 	public MemberVO(String id) {
 		this.id = id;
 		}
+	
+	//삭제하는 생성자 
+	public MemberVO(String id, String pwd) {
+		this.id = id;
+		this.pwd = pwd;
+	}
 	//3.toString
 	@Override
 	public String toString() {

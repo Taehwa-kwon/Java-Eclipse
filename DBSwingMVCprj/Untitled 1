@@ -1,0 +1,41 @@
+	sqlplus /nolog
+SQL> conn / as sysdba
+SQL> create user member2 identified by 1234;
+SQL> grant connect, resource to member2;
+
+Oracle 
+
+
+CREATE  TABLE   MEMber2
+(
+      ID        VARCHAR2(12)   PRIMARY KEY
+     ,PWD       VARCHAR2(12)
+     ,NAME      VARCHAR2(30)
+     ,JOB       VARCHAR2(30)
+     ,GENDER    VARCHAR2(1)    
+     ,INTRO     VARCHAR2(4000)
+     ,REGDATE   DATE           DEFAULT SYSDATE
+);
+
+drop table memebr2;
+
+
+INSERT INTO member2 ( id,  pwd,  name, job, gender, intro )
+ VALUES ( 'sea1',  '1234',  '원석', '학생', 'M', 'HI~~~~'  );
+ 
+INSERT INTO member2 ( id,  pwd,  name, job, gender, intro )
+ VALUES ( 'sea2',  '1234',  '아름', '학생', 'F', '^^'  );
+ 
+INSERT INTO member2 ( id,  pwd,  name, job, gender, intro )
+ VALUES ( 'sea3',  '1234',  '유빈', '학생', 'F', '하이~~~'  ); 
+ 
+INSERT INTO member2 ( id,  pwd,  name, job, gender, intro )
+ VALUES ( 'sea4',  '1234',  '효성', '학생', 'M', '하이~~~'  );  
+
+INSERT INTO member2 ( id,  pwd,  name, job, gender, intro )
+ VALUES ( 'sea5',  '1234',  '진석', '학생', 'M', 'ㅎㅎㅎ~~~'  );  
+ 
+INSERT INTO member2 ( id,  pwd,  name, job, gender, intro )
+ VALUES ( 'sea6',  '1234',  '석준', '학생', 'M', 'ㅋㅋㅋ~~~'  );   
+
+COMMIT;

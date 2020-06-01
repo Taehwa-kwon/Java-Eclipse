@@ -1,0 +1,171 @@
+package com.pknu.member.view;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import com.pknu.member.dao.MemberDao;
+
+public class MemberList extends JFrame implements ActionListener, MouseListener{ //다중 상속가능 || 왜 인터페이스를 하는지. 매번 이벤트를 받을때마다 다 다른 행동을 하려고, 
+		// + add unimplements 를 해준다. 
+	Vector v;
+	Vector<String> colnames;	//제목줄을 
+	
+	
+	DefaultTableModel model;
+	//추가할 컴포넌트 목록 
+	JTable jt;
+	JScrollPane pane;
+	JPanel jpanel;
+	JButton btnInsert, btnRefresh;
+	
+	
+	//마우스 이벤트를 위해서 전역변수 지정
+	MemberProc memberProc; //개인조회
+	
+		public MemberList() {
+			super("회원관리 프로그램 ver 1.0");
+			
+			initComponent(); //컴포넌트 배치
+			
+			//화면크기 조정 
+			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			this.setSize(600,600);
+			this.setVisible(true);
+			this.setLocationRelativeTo(null); // 프레임 실행시 위치 중앙
+		}
+		//부품배치
+		private void initComponent() {
+			//제목줄
+			colnames = getColumnNames();
+			
+			MemberDao mDao = new MemberDao();
+			v= mDao.getMemberList("");
+			
+			model = new DefaultTableModel(v,colnames); //v : vector data 집합 
+			
+			jt = new JTable(model);
+			pane = new JScrollPane(jt);
+			this.add(pane);
+			
+			
+			//화면상단에 회원가입 버튼
+			jpanel = new JPanel();
+			btnInsert = new JButton("회원가입");
+			
+			btnRefresh = new JButton("새로고침");
+			
+			jpanel.add(btnInsert);
+			
+			jpanel.add(btnRefresh);
+			this.add(jpanel,BorderLayout.NORTH);
+			
+			//회원가입 버튼을 누르면 이벤트 작동
+			btnInsert.addActionListener(this);// 이벤트 처리를 내 객체에게~ this가 //addActionListener을  사용하려면 반드시 implement하여야 한다.
+			
+			btnRefresh.addActionListener(this); // 이거는 업데이트문
+			
+			//JTable에 대한 마우스 이벤트를 추가한다. 
+			//jt.addMouseListener(l); // 마우스 오른쪽/왼쪽버튼 여기에 대한 컨트롤 
+			//jt.addMouseMotionListener(l); //마우스를 움직이는것에 대한 컨트롤 
+			//jt.addMouseWheelListener(l); //마우스 스크롤 버튼 
+			jt.addMouseListener(this);
+			
+			
+			
+			
+			
+		}
+		//JTable에 제목줄 설정 //Swing에서는 벡터를 꼭 써야함 . ArrayList, Vector 은 list의 일종으로 동적배열 
+		private Vector<String> getColumnNames() {
+			Vector<String>titles = new Vector<String>();
+			titles.add("아이디");
+			titles.add("암호");
+			titles.add("이름");
+			titles.add("직업");
+			titles.add("성별");
+			titles.add("자기소개");
+			titles.add("가입일");
+			
+			
+			
+			return titles;
+		}
+		public static void main(String [] args) {
+			new MemberList();
+	}
+		//새로고침(Jtable을 다시 불러와야 한다...)
+		public void JtableRefresh() {
+			MemberDao mDao = new MemberDao();
+			DefaultTableModel model = new DefaultTableModel( mDao.getMemberList(""), getColumnNames());  //이게  
+			jt.setModel(model);  //이게 
+		}
+		
+		
+		//btnInsert를 클릭하였을때 수행할 명령 작성하는 곳 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==btnInsert) {
+				System.out.println("버튼을 클릭했습니다. ");
+				new MemberProc(this);
+			} else {
+				if(e.getSource()==btnRefresh) {
+					System.out.println("새로고침 버튼을 클릭했습니다. ");
+					JtableRefresh();
+				}
+			}
+			
+		}
+		
+		//마우스  관련 이벤트들 ~ addMouseListener
+		//여기서 안좋은점이 addMouseListener(this) 이걸 해서 implement해서 인터페이스 override가 5개 나오는데
+		//내가 쓰는건 한개라도 
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int selRow = jt.getSelectedRow(); //마우스로 선택한 줄번호 // 제목줄 제외
+			System.out.println("선택한 줄 번호 : " + selRow);
+			String uid = String.valueOf(jt.getValueAt(selRow, 0)); //맨끝에 0 이 Column의 몇번째인지 
+			System.out.println(uid);
+			
+			
+			if (memberProc == null) { //기본 개인조회하면이 없으면  new 해라 
+				memberProc = new MemberProc(uid,this);
+			}else {
+				memberProc.dispose(); //아니면 껐다가 다시 켜서 
+				memberProc = new MemberProc(uid,this);
+			}
+			memberProc.setLocation(650,150); //
+			
+		}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// 마우스버튼을 누르고 있는동안
+			
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// 마우스버튼을 누르고 있다가 떼는 순간
+			
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// 마우스의 커서가 어떤 범위안에 들어간 순간
+			
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// 마우스킈 커서가 어떤 범위밖으로 나가는 순간 
+			
+		}
+
+}
